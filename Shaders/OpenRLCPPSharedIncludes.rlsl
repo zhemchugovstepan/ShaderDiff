@@ -1,0 +1,20 @@
+#pragma once
+
+#if defined(UNITY_EDITOR)
+#include "External/Wintermute/Vector.h"
+#define SHARED_int3_type Wintermute::Vec3i
+#define SHARED_CONST const
+#define SHARED_INLINE inline
+#else
+#define SHARED_int3_type ivec3
+#define SHARED_CONST in
+#define SHARED_INLINE
+#endif // UNITY_EDITOR
+
+SHARED_INLINE int OpenRLCPPShared_GetRegionIdx(SHARED_CONST SHARED_int3_type loc, SHARED_CONST SHARED_int3_type gridDims)
+{
+    if (loc.x < 0 || loc.y < 0 || loc.z < 0 || loc.x >= gridDims.x || loc.y >= gridDims.y || loc.z >= gridDims.z)
+        return -1;
+
+    return loc.x + loc.y * gridDims.x + loc.z * gridDims.x * gridDims.y;
+}
