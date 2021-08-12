@@ -1,0 +1,35 @@
+/* Shared defines to be included from both rlsl and cpp files */
+
+// Target aka unique buffer name
+// (can't overlap between lightmaps and light probes)
+#define GI_BUFFER                            0
+#define AO_BUFFER                            1
+#define ENV_BUFFER                           2
+#define GI_DIRECT_BUFFER                     3
+#define GI_SAMPLES_BUFFER                    4
+#define DIRECT_SAMPLES_BUFFER                5
+#define ENV_SAMPLES_BUFFER                   6
+#define VALIDITY_BUFFER                      7
+#define DIRECTIONAL_FROM_DIRECT_BUFFER       8
+#define DIRECTIONAL_FROM_GI_BUFFER           9
+#define SHADOW_MASK_BUFFER                  10
+#define SHADOW_MASK_SAMPLE_BUFFER           11
+#define PROBE_BUFFER                        12
+#define PROBE_OCCLUSION_BUFFER              13
+#define CUSTOM_BAKE_BUFFER                  14
+
+// convergence bitmasks
+#define PVR_CONVERGED_DIRECT    (1<<0)
+#define PVR_CONVERGED_GI        (1<<1)
+#define PVR_CONVERGED_ENV       (1<<2)
+
+// limits
+#define PVR_MAX_ENVSAMPLES      16384
+// a few light related constants
+#define PVR_MAX_LIGHTS          32768       // maximum number of lights for the whole scene
+#define PVR_MAX_LIGHT_REGIONS   8192        // maximum number of lightgrid cells
+// Reserve 4MB for cdfs. This roughly gives us 512 lights per light region if we got 8K regions, which should be good enough (tm).
+// The conservative value obeying PVR_MAX_LIGHTS and PVR_MAX_LIGHT_REGIONS would require about 256MB which seems excessive.
+#define PVR_MAX_CDFS            4202496
+#define PVR_MAX_SHADOW_RAYS     4           // limit of how many shadow rays are shot per bounce excluding directional light shadows
+#define PLM_MAX_DIR_LIGHTS      8           // limit of how many directional lights are supported
